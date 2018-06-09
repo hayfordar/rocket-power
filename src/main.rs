@@ -2,13 +2,10 @@
 #![plugin(rocket_codegen)]
 extern crate rocket;
 
-#[get("/")]
-fn hello() -> &'static str {
-    "Hello, world!"
-}
+mod routes;
 
 fn main() {
     rocket::ignite()
-        .mount("/", routes![hello])
+        .mount("/", routes::all_routes())
         .launch();
 }
