@@ -1,0 +1,8 @@
+[package]
+name = "rocket-power"
+version = "0.1.0"
+authors = ["Andrew Hayford <emailandrewhayford@gmail.com>"]
+
+[dependencies]
+rocket = "^0.3.0"
+rocket_codegen = "*"
