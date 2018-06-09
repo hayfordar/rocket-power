@@ -3,7 +3,7 @@ use rocket_contrib::{Json};
 #[get("/rest/api/index")]
 fn index() -> Json {
     Json(json!({
-        "status" : "good"
+        "status" : "ok"
     }))
 }
 
@@ -23,5 +23,5 @@ fn index_test() {
         .unwrap()
         .into_string()
         .unwrap();
-    assert!(body.contains("good"));
+    assert!(body.contains("ok"));
 }

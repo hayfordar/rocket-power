@@ -7,6 +7,10 @@ authors = ["Andrew Hayford <emailandrewhayford@gmail.com>"]
 rocket = "^0.3.0"
 rocket_codegen = "^0.3.0"
 rocket_contrib = { version = "^0.3.0", features = ["json"] }
+
 serde = "1.0"
 serde_json = "1.0"
 serde_derive = "1.0"
+
+diesel = { version = "^1.0.0", features = ["mysql", "r2d2", "chrono"] }
+chrono = { version = "^0.4.0", features = ["serde"] }
