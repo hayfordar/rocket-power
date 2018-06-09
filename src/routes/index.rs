@@ -1,7 +1,6 @@
 use rocket_contrib::{Json};
-use rocket::http::{Status, ContentType};
 
-#[get("/", format = "application/json")]
+#[get("/rest/api/index")]
 fn index() -> Json {
     Json(json!({
         "status" : "good"
@@ -15,16 +14,14 @@ fn index_test() {
     let client = rocket::local::Client::new(instance)
         .unwrap();
     
-    let mut res = client.get("/")
-        .header(ContentType::JSON)
+    let mut res = client.get("/rest/api/index")
+        .header(rocket::http::ContentType::JSON)
         .dispatch();
-    assert_eq!(res.status(), Status::Ok);
+    assert_eq!(res.status(), rocket::http::Status::Ok);
     
     let body = res.body()
         .unwrap()
         .into_string()
         .unwrap();
-
     assert!(body.contains("good"));
-    
 }
