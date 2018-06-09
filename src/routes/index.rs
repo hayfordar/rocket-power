@@ -1,8 +1,11 @@
-use rocket;
+use rocket_contrib::{Json};
+use rocket::http::{Status, ContentType};
 
-#[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
+#[get("/", format = "application/json")]
+fn index() -> Json {
+    Json(json!({
+        "status" : "good"
+    }))
 }
 
 #[test]
@@ -11,7 +14,17 @@ fn index_test() {
         .mount("/", routes![index]);
     let client = rocket::local::Client::new(instance)
         .unwrap();
-    let mut res = client.get("/").dispatch();
-    assert_eq!(res.body_string()
-        , Some("Hello, world!".into()));
+    
+    let mut res = client.get("/")
+        .header(ContentType::JSON)
+        .dispatch();
+    assert_eq!(res.status(), Status::Ok);
+    
+    let body = res.body()
+        .unwrap()
+        .into_string()
+        .unwrap();
+
+    assert!(body.contains("good"));
+    
 }
